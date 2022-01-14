@@ -1,2 +1,3 @@
 class Discount < ApplicationRecord
-end 
+  belongs_to :merchant
+end
