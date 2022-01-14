@@ -21,18 +21,25 @@ RSpec.describe "Discounts Index Page" do
     expect(page).to have_content("Item Quantity Threshold: #{@discount3.quantity_threshold}")
   end
 
-  xit 'has a link to each discounts show page' do
-    # And each bulk discount listed includes a link to its show page
-    within ("#discount-#{discountA.id}") do
+  it 'has a link to each discounts show page' do
+    within ("#discount-#{@discount1.id}") do
       expect(page).to have_link("View Discount")
-      click_link "View Discount"
-      expect(current_path).to eq("/merchant/#{@merchant1.id}/discounts/#{@discount1.id}")
+      have_link "View Discount"
     end
 
-    within ("#discount-#{discountB.id}") do
+    within ("#discount-#{@discount2.id}") do
       expect(page).to have_link("View Discount")
+      have_link "View Discount"
+    end
+
+    within ("#discount-#{@discount3.id}") do
+      expect(page).to have_link("View Discount")
+      have_link "View Discount"
+    end
+
+    within ("#discount-#{@discount1.id}") do
       click_link "View Discount"
-      expect(current_path).to eq("/merchant/#{@merchant1.id}/discounts/#{@discount2.id}")
+      expect(current_path).to eq("/merchant/#{@merchant1.id}/discounts/#{@discount1.id}")
     end
   end
 end
