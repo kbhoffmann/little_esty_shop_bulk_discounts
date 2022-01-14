@@ -12,14 +12,13 @@ RSpec.describe "Discounts Index Page" do
   end
 
   it 'has all the bulk discounts with their percentage_discount and quantity_thresholds' do
-    # Where I see all of my bulk discounts including their
-    # percentage discount and quantity thresholds
-    expect(page).to have_content(@discount1.percentage_discount)
-    expect(page).to have_content(@discount1.quantity_threshold)
-    expect(page).to have_content(@discount2.percentage_discount)
-    expect(page).to have_content(@discount2.quantity_threshold)
-    expect(page).to have_content(@discount3.percentage_discount)
-    expect(page).to have_content(@discount3.quantity_threshold)
+
+    expect(page).to have_content("Percent Discount: #{@discount1.percentage_discount}")
+    expect(page).to have_content("Item Quantity Threshold: #{@discount1.quantity_threshold}")
+    expect(page).to have_content("Percent Discount: #{@discount2.percentage_discount}")
+    expect(page).to have_content("Item Quantity Threshold: #{@discount2.quantity_threshold}")
+    expect(page).to have_content("Percent Discount: #{@discount3.percentage_discount}")
+    expect(page).to have_content("Item Quantity Threshold: #{@discount3.quantity_threshold}")
   end
 
   xit 'has a link to each discounts show page' do
