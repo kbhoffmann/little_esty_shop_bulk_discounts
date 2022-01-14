@@ -13,7 +13,7 @@ The quantities of items ordered cannot be added together to meet the quantity th
 
 
 Merchant Bulk Discounts Index
-[ ]
+[X]
 As a merchant
 When I visit my merchant dashboard
 Then I see a link to view all my discounts
