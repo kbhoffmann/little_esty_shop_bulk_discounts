@@ -46,4 +46,10 @@ RSpec.describe "Discounts Index Page" do
   it 'has a section with an Upcoming Holidays header' do
     expect(page).to have_content("Upcoming Holidays")
   end
+
+  it 'has a link to create a new discount' do
+    expect(page).to have_link("Create New Discount")
+    click_link "Create New Discount"
+    expect(current_path).to eq("/merchant/#{@merchant1.id}/discounts/new")
+  end
 end
