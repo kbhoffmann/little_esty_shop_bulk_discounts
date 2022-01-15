@@ -4,6 +4,11 @@
   <div id = "discount-<%= discount.id %>"
     <p>Percent Discount: <%= discount.percentage_discount %></p>
     <p>Item Quantity Threshold: <%= discount.quantity_threshold %></p>
-    <p><%= link_to "View Discount", "/merchant/#{@merchant.id}/discounts/#{discount.id}" %></p>
+    <p><%= link_to "View Discount", merchant_discount_path(discount.merchant.id, discount.id) %></p>
   </div>
 <% end  %>
+
+<%= link_to "Create New Discount", new_merchant_discount_path %>
+
+
+<h2>Upcoming Holidays</h2>
