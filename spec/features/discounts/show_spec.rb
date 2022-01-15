@@ -17,7 +17,7 @@ RSpec.describe 'Merchant Discount Show Page' do
     expect(page).to_not have_content(discount3.quantity_threshold)
   end
 
-  xit 'has a link to a form to edit the discount' do
+  it 'has a link to a form to edit the discount' do
     merchant1 = Merchant.create!(name: 'Cat Stuff')
     discount1 = Discount.create!(percentage_discount: 10, quantity_threshold: 10, merchant_id: merchant1.id)
 
@@ -25,6 +25,6 @@ RSpec.describe 'Merchant Discount Show Page' do
 
     click_link "Edit Discount"
 
-    expect(current_path).to eq(edit_merchant_discount_path(@merchant1))
+    expect(current_path).to eq(edit_merchant_discount_path(merchant1.id, discount1.id))
   end
 end
