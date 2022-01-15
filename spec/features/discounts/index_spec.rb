@@ -42,4 +42,8 @@ RSpec.describe "Discounts Index Page" do
       expect(current_path).to eq("/merchant/#{@merchant1.id}/discounts/#{@discount1.id}")
     end
   end
+
+  it 'has a section with an Upcoming Holidays header' do
+    expect(page).to have_content("Upcoming Holidays")
+  end
 end

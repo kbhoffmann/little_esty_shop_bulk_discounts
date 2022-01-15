@@ -26,7 +26,7 @@ And each bulk discount listed includes a link to its show page
 =======================================================================
 
 As a merchant
-[ ]
+[ ]- need to create a section and consume the API 
 When I visit the discounts index page
 I see a section with a header of "Upcoming Holidays"
 In this section the name and date of the next 3 upcoming US holidays are listed.
