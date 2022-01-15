@@ -36,7 +36,6 @@ RSpec.describe "Discounts Index Page" do
 
     within ("#discount-#{@discount1.id}") do
       click_link "View Discount"
-      # expect(current_path).to eq("/merchant/#{@merchant1.id}/discounts/#{@discount1.id}")
       expect(current_path).to eq(merchant_discount_path(@merchant1, @discount1))
     end
   end
@@ -48,5 +47,26 @@ RSpec.describe "Discounts Index Page" do
   it 'has a link to create a new discount' do
     click_link "Create New Discount"
     expect(current_path).to eq(new_merchant_discount_path(@merchant1))
+  end
+
+  xit 'has a link to delete a discount' do
+    within ("#discount-#{@discount1.id}") do
+      has_link? "Delete Discount"
+    end
+
+    within ("#discount-#{@discount2.id}") do
+      has_link? "Delete Discount"
+    end
+
+    within ("#discount-#{@discount3.id}") do
+      has_link? "Delete Discount"
+    end
+
+    within ("#discount-#{@discount1.id}") do
+      click_link "Delete Discount"
+      expect(current_path).to eq(merchant_discounts_path(@merchant1.id))
+      expect(page).to_not have_content(@discount1.percentage_discount)
+      expect(page).to_not have_content(@discount1.quantity_threshold)
+    end
   end
 end
