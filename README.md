@@ -49,7 +49,7 @@ And I see my new bulk discount listed
 =============
 
 4) Merchant Bulk Discount Delete
-[ ]
+[X]
 As a merchant
 When I visit my bulk discounts index
 Then next to each bulk discount I see a link to delete it
@@ -60,12 +60,12 @@ And I no longer see the discount listed
 =============
 
 5) Merchant Bulk Discount Show
-[ ]
+[X]
 As a merchant
 When I visit my bulk discount show page
 Then I see the bulk discount's quantity threshold and percentage discount
 
-========================================================================
+==============
 
 6) Merchant Bulk Discount Edit
 [ ]
@@ -79,7 +79,7 @@ When I change any/all of the information and click submit
 Then I am redirected to the bulk discount's show page
 And I see that the discount's attributes have been updated
 
-==========================================================================
+================
 
 7) Merchant Invoice Show Page: Total Revenue and Discounted Revenue
 [ ]
@@ -88,7 +88,7 @@ When I visit my merchant invoice show page
 Then I see the total revenue for my merchant from this invoice (not including discounts)
 And I see the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation
 
-==========================================================================
+=================
 
 8) Merchant Invoice Show Page: Link to applied discounts
 [ ]
