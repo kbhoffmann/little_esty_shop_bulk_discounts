@@ -12,7 +12,7 @@ If the quantity of an item ordered meets or exceeds the quantity threshold, then
 The quantities of items ordered cannot be added together to meet the quantity thresholds, e.g. a customer cannot order 1 of Item A and 1 of Item B to meet a quantity threshold of 2. They must order 2 or Item A and/or 2 of Item B
 
 
-Merchant Bulk Discounts Index
+1) Merchant Bulk Discounts Index
 [X]
 As a merchant
 When I visit my merchant dashboard
@@ -23,20 +23,20 @@ Where I see all of my bulk discounts including their
 percentage discount and quantity thresholds
 And each bulk discount listed includes a link to its show page
 
-=======================================================================
+================
 
-As a merchant
-[ ]- need to create a section and consume the API 
+2) As a merchant
+[ ]- need to create a section and consume the API
 When I visit the discounts index page
 I see a section with a header of "Upcoming Holidays"
 In this section the name and date of the next 3 upcoming US holidays are listed.
 
 Use the Next Public Holidays Endpoint in the [Nager.Date API](https://date.nager.at/swagger/index.html)
 
-=======================================================================
+=============
 
-Merchant Bulk Discount Create
-[ ]
+3) Merchant Bulk Discount Create
+[X]
 As a merchant
 When I visit my bulk discounts index
 Then I see a link to create a new discount
@@ -46,9 +46,9 @@ When I fill in the form with valid data
 Then I am redirected back to the bulk discount index
 And I see my new bulk discount listed
 
-=======================================================================
+=============
 
-Merchant Bulk Discount Delete
+4) Merchant Bulk Discount Delete
 [ ]
 As a merchant
 When I visit my bulk discounts index
@@ -57,9 +57,9 @@ When I click this link
 Then I am redirected back to the bulk discounts index page
 And I no longer see the discount listed
 
-=======================================================================
+=============
 
-Merchant Bulk Discount Show
+5) Merchant Bulk Discount Show
 [ ]
 As a merchant
 When I visit my bulk discount show page
@@ -67,7 +67,7 @@ Then I see the bulk discount's quantity threshold and percentage discount
 
 ========================================================================
 
-Merchant Bulk Discount Edit
+6) Merchant Bulk Discount Edit
 [ ]
 As a merchant
 When I visit my bulk discount show page
@@ -81,7 +81,7 @@ And I see that the discount's attributes have been updated
 
 ==========================================================================
 
-Merchant Invoice Show Page: Total Revenue and Discounted Revenue
+7) Merchant Invoice Show Page: Total Revenue and Discounted Revenue
 [ ]
 As a merchant
 When I visit my merchant invoice show page
@@ -90,7 +90,7 @@ And I see the total discounted revenue for my merchant from this invoice which i
 
 ==========================================================================
 
-Merchant Invoice Show Page: Link to applied discounts
+8) Merchant Invoice Show Page: Link to applied discounts
 [ ]
 As a merchant
 When I visit my merchant invoice show page
@@ -98,7 +98,7 @@ Next to each invoice item I see a link to the show page for the bulk discount th
 
 ==========================================================================
 
-Admin Invoice Show Page: Total Revenue and Discounted Revenue
+9) Admin Invoice Show Page: Total Revenue and Discounted Revenue
 [ ]
 As an admin
 When I visit an admin invoice show page
