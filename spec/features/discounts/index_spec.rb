@@ -8,7 +8,7 @@ RSpec.describe "Discounts Index Page" do
     @discount2 = Discount.create!(percentage_discount: 20, quantity_threshold: 20, merchant_id: @merchant1.id)
     @discount3 = Discount.create!(percentage_discount: 30, quantity_threshold: 30, merchant_id: @merchant1.id)
 
-    visit "/merchant/#{@merchant1.id}/discounts"
+    visit merchant_discounts_path(@merchant1.id)
   end
 
   it 'has all the bulk discounts with their percentage_discount and quantity_thresholds' do
@@ -36,7 +36,8 @@ RSpec.describe "Discounts Index Page" do
 
     within ("#discount-#{@discount1.id}") do
       click_link "View Discount"
-      expect(current_path).to eq("/merchant/#{@merchant1.id}/discounts/#{@discount1.id}")
+      # expect(current_path).to eq("/merchant/#{@merchant1.id}/discounts/#{@discount1.id}")
+      expect(current_path).to eq(merchant_discount_path(@merchant1, @discount1))
     end
   end
 
@@ -44,9 +45,8 @@ RSpec.describe "Discounts Index Page" do
     expect(page).to have_content("Upcoming Holidays")
   end
 
-  xit 'has a link to create a new discount' do
-    expect(page).to have_link("Create New Discount")
+  it 'has a link to create a new discount' do
     click_link "Create New Discount"
-    expect(current_path).to eq("/merchant/#{@merchant1.id}/discounts/new")
+    expect(current_path).to eq(new_merchant_discount_path(@merchant1))
   end
 end
