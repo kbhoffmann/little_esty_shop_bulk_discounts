@@ -31,8 +31,17 @@ class DiscountsController < ApplicationController
   end
 
   def update
+    discount = Discount.find(params[:id])
     merchant = Merchant.find(params[:merchant_id])
-    discount = Discount.update(quantity_threshold: params["Quantity Threshold"], percentage_discount: params["Percent Discount"], merchant_id: merchant.id)
+
+    if discount.update(quantity_threshold: params["Quantity Threshold"], percentage_discount: params["Percent Discount"])
+      redirect_to merchant_discount_path(merchant, discount)
+    else
+      error_message = discount.errors.full_messages.to_sentence
+      flash[:notice] = "Discount not Created: #{error_message}"
+
+      redirect_to edit_merchant_discount_path(merchant, discount)
+    end
   end
 
   def destroy
