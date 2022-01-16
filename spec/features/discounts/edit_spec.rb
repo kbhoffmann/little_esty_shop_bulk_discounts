@@ -64,4 +64,14 @@ RSpec.describe 'Merchant Discount Edit Page' do
     expect(page).to have_content("Item Quantity Threshold: 50")
     expect(page).to_not have_content("Item Quantity Threshold: 20")
   end
+
+  it 'shows an error message if not filled in correctly' do
+    fill_in("Percent Discount", with: -25)
+    fill_in("Quantity Threshold", with: -50)
+
+    click_on "Submit"
+
+    expect(current_path).to eq(edit_merchant_discount_path(@merchant1.id, @discount1.id))
+    expect(page).to have_content("Discount not Created: Percentage discount must be greater than 0 and Quantity threshold must be greater than 0")
+  end
 end
