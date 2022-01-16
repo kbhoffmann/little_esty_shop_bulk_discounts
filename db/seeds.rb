@@ -25,56 +25,56 @@ item9 = Item.create!(name: "Cuddle Bone", description: "Bird Treat", unit_price:
 
 #customers and invoices
 kerri     = Customer.create!(first_name: 'Kerri', last_name: 'Wollner', address: '1234 S State St, Denver, CO')
-invoice1  = Invoice.create!(status: 1, customer_id: kerri.id, merchant_id: merchant1.id, created_at: Time.now - 7.day)
-invoice2  = Invoice.create!(status: 1, customer_id: kerri.id, merchant_id: merchant2.id, created_at: Time.now - 5.day)
-invoice3  = Invoice.create!(status: 1, customer_id: kerri.id, merchant_id: merchant3.id, created_at: Time.now - 4.day)
+invoice1  = Invoice.create!(status: 1, customer_id: kerri.id, created_at: Time.now - 7.day)
+invoice2  = Invoice.create!(status: 1, customer_id: kerri.id, created_at: Time.now - 5.day)
+invoice3  = Invoice.create!(status: 1, customer_id: kerri.id, created_at: Time.now - 4.day)
 
 rob       = Customer.create!(first_name: 'Rob', last_name: 'Kitsch', address: '3333 N Memphis St., San Diego, CA')
-invoice4  = Invoice.create!(status: 1, customer_id: rob.id, merchant_id: merchant1.id, created_at: Time.now - 6.day)
-invoice5  = Invoice.create!(status: 1, customer_id: rob.id, merchant_id: merchant2.id, created_at: Time.now - 4.day)
-invoice6  = Invoice.create!(status: 1, customer_id: rob.id, merchant_id: merchant3.id, created_at: Time.now - 3.day)
+invoice4  = Invoice.create!(status: 1, customer_id: rob.id, created_at: Time.now - 6.day)
+invoice5  = Invoice.create!(status: 1, customer_id: rob.id, created_at: Time.now - 4.day)
+invoice6  = Invoice.create!(status: 1, customer_id: rob.id, created_at: Time.now - 3.day)
 
 dana      = Customer.create!(first_name: 'Dana', last_name: 'Bode', address: '999 W Hills St, Milwaukee, CO')
-invoice7  = Invoice.create!(status: 1, customer_id: dana.id, merchant_id: merchant1.id, created_at: Time.now - 5.day)
-invoice8  = Invoice.create!(status: 1, customer_id: dana.id, merchant_id: merchant2.id, created_at: Time.now - 3.day)
-invoice9  = Invoice.create!(status: 1, customer_id: dana.id, merchant_id: merchant3.id, created_at: Time.now - 2.day)
+invoice7  = Invoice.create!(status: 1, customer_id: dana.id, created_at: Time.now - 5.day)
+invoice8  = Invoice.create!(status: 1, customer_id: dana.id, created_at: Time.now - 3.day)
+invoice9  = Invoice.create!(status: 1, customer_id: dana.id, created_at: Time.now - 2.day)
 
 #invoice_items
 ii1   = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 7, invoice_id: invoice1.id, item_id: item1.id)
 ii2   = InvoiceItem.create!(status: 2, quantity: 5, unit_price: 2, invoice_id: invoice1.id, item_id: item2.id)
 ii3   = InvoiceItem.create!(status: 2, quantity: 25, unit_price: 10, invoice_id: invoice1.id, item_id: item3.id)
 
-ii4   = InvoiceItem.create!(status: 2, quantity: 5, unit_price: 6, invoice_id: invoice2.id, item_id: item1.id)
-ii5   = InvoiceItem.create!(status: 2, quantity: 15, unit_price: 9, invoice_id: invoice2.id, item_id: item2.id)
-ii6   = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 12, invoice_id: invoice2.id, item_id: item3.id)
+ii4   = InvoiceItem.create!(status: 2, quantity: 5, unit_price: 6, invoice_id: invoice2.id, item_id: item4.id)
+ii5   = InvoiceItem.create!(status: 2, quantity: 15, unit_price: 9, invoice_id: invoice2.id, item_id: item5.id)
+ii6   = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 12, invoice_id: invoice2.id, item_id: item6.id)
 
-ii7   = InvoiceItem.create!(status: 2, quantity: 27, unit_price: 11, invoice_id: invoice3.id, item_id: item1.id)
-ii8   = InvoiceItem.create!(status: 2, quantity: 7, unit_price: 8, invoice_id: invoice3.id, item_id: item2.id)
-ii9   = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 4, invoice_id: invoice3.id, item_id: item3.id)
+ii7   = InvoiceItem.create!(status: 2, quantity: 27, unit_price: 11, invoice_id: invoice3.id, item_id: item7.id)
+ii8   = InvoiceItem.create!(status: 2, quantity: 7, unit_price: 8, invoice_id: invoice3.id, item_id: item8.id)
+ii9   = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 4, invoice_id: invoice3.id, item_id: item9.id)
 #---------
 ii10   = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 7, invoice_id: invoice4.id, item_id: item1.id)
 ii11   = InvoiceItem.create!(status: 2, quantity: 5, unit_price: 2, invoice_id: invoice4.id, item_id: item2.id)
 ii12   = InvoiceItem.create!(status: 2, quantity: 25, unit_price: 10, invoice_id: invoice4.id, item_id: item3.id)
 
-ii13   = InvoiceItem.create!(status: 2, quantity: 5, unit_price: 6, invoice_id: invoice5.id, item_id: item1.id)
-ii14   = InvoiceItem.create!(status: 2, quantity: 15, unit_price: 9, invoice_id: invoice5.id, item_id: item2.id)
-ii15   = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 12, invoice_id: invoice5.id, item_id: item3.id)
+ii13   = InvoiceItem.create!(status: 2, quantity: 5, unit_price: 6, invoice_id: invoice5.id, item_id: item4.id)
+ii14   = InvoiceItem.create!(status: 2, quantity: 15, unit_price: 9, invoice_id: invoice5.id, item_id: item5.id)
+ii15   = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 12, invoice_id: invoice5.id, item_id: item6.id)
 
-ii16   = InvoiceItem.create!(status: 2, quantity: 27, unit_price: 11, invoice_id: invoice6.id, item_id: item1.id)
-ii17   = InvoiceItem.create!(status: 2, quantity: 7, unit_price: 8, invoice_id: invoice6.id, item_id: item2.id)
-ii18   = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 4, invoice_id: invoice6.id, item_id: item3.id)
+ii16   = InvoiceItem.create!(status: 2, quantity: 27, unit_price: 11, invoice_id: invoice6.id, item_id: item7.id)
+ii17   = InvoiceItem.create!(status: 2, quantity: 7, unit_price: 8, invoice_id: invoice6.id, item_id: item8.id)
+ii18   = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 4, invoice_id: invoice6.id, item_id: item9.id)
 #---------
 ii19   = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 7, invoice_id: invoice7.id, item_id: item1.id)
 ii20   = InvoiceItem.create!(status: 2, quantity: 5, unit_price: 2, invoice_id: invoice7.id, item_id: item2.id)
 ii21   = InvoiceItem.create!(status: 2, quantity: 25, unit_price: 10, invoice_id: invoice7.id, item_id: item3.id)
 
-ii22   = InvoiceItem.create!(status: 2, quantity: 5, unit_price: 6, invoice_id: invoice8.id, item_id: item1.id)
-ii23   = InvoiceItem.create!(status: 2, quantity: 15, unit_price: 9, invoice_id: invoice8.id, item_id: item2.id)
-ii24   = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 12, invoice_id: invoice8.id, item_id: item3.id)
+ii22   = InvoiceItem.create!(status: 2, quantity: 5, unit_price: 6, invoice_id: invoice8.id, item_id: item4.id)
+ii23   = InvoiceItem.create!(status: 2, quantity: 15, unit_price: 9, invoice_id: invoice8.id, item_id: item5.id)
+ii24   = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 12, invoice_id: invoice8.id, item_id: item6.id)
 
-ii25   = InvoiceItem.create!(status: 2, quantity: 27, unit_price: 11, invoice_id: invoice9.id, item_id: item1.id)
-ii26   = InvoiceItem.create!(status: 2, quantity: 7, unit_price: 8, invoice_id: invoice9.id, item_id: item2.id)
-ii27   = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 4, invoice_id: invoice9.id, item_id: item3.id)
+ii25   = InvoiceItem.create!(status: 2, quantity: 27, unit_price: 11, invoice_id: invoice9.id, item_id: item7.id)
+ii26   = InvoiceItem.create!(status: 2, quantity: 7, unit_price: 8, invoice_id: invoice9.id, item_id: item8.id)
+ii27   = InvoiceItem.create!(status: 2, quantity: 10, unit_price: 4, invoice_id: invoice9.id, item_id: item9.id)
 
 #transactions
 trans1       = Transaction.create!(result: "success", credit_card_number: 010001001022, credit_card_expiration_date: 20220101, invoice_id: invoice1.id,)
