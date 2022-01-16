@@ -10,5 +10,6 @@ RSpec.describe Discount do
     it { should validate_presence_of :quantity_threshold}
     it { should validate_numericality_of(:percentage_discount).is_greater_than(0)}
     it { should validate_numericality_of(:quantity_threshold).is_greater_than(0)}
+    it { should validate_numericality_of(:quantity_threshold).only_integer }
   end
 end
