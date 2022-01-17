@@ -137,12 +137,25 @@ RSpec.describe 'invoices show' do
       ii2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item2.id, quantity: 5, unit_price: 8, status: 2)
       ii3 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item3.id, quantity: 10, unit_price: 5, status: 2)
       discount1 = Discount.create!(percentage_discount: 10, quantity_threshold: 10, merchant_id: merchant1.id)
-      # discount2 = Discount.create!(percentage_discount: 20, quantity_threshold: 20, merchant_id: merchant1.id)
-      # discount3 = Discount.create!(percentage_discount: 30, quantity_threshold: 30, merchant_id: merchant1.id)
 
       visit merchant_invoice_path(merchant1, invoice1)
 
       expect(page).to have_content("Revenue after discount: $135.00")
+    end
+
+    it 'links to the applied discounts' do
+      merchant1 = Merchant.create!(name: 'Hair Care')
+      customer1 = Customer.create!(first_name: 'Brooke', last_name: 'Stewart')
+      invoice1 = Invoice.create!(customer_id: customer1.id, status: 2)
+      discount1 = Discount.create!(percentage_discount: 10, quantity_threshold: 10, merchant_id: merchant1.id)
+
+      visit merchant_invoice_path(merchant1, invoice1)
+
+      click_link "See Discount"
+
+      expect(current_path).to eq(merchant_discount_path(merchant1,discount1))
+      #Next to each invoice item I see a link to the show page
+      #for the bulk discount that was applied (if any)
     end
   end
 end
