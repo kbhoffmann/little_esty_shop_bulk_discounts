@@ -13,4 +13,13 @@ class Invoice < ApplicationRecord
   def total_revenue
     invoice_items.sum("unit_price * quantity")
   end
+
+  def max_percent_discount
+    invoice_items.joins(item: {merchant: :discounts})
+          .where('invoice_items.quantity >= discounts.quantity_threshold')
+          .select('discounts.percentage_discount, invoice_items.*')
+          .order('discounts.percentage_discount')
+          .pluck('discounts.percentage_discount').last
+          #later call .max??????
+  end
 end
