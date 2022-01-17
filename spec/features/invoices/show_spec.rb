@@ -79,7 +79,7 @@ RSpec.describe 'invoices show' do
 
     end
 
-    xit "shows the total revenue for this invoice" do
+    it "shows the total revenue for this invoice" do
       visit merchant_invoice_path(@merchant1, @invoice_1)
 
       expect(page).to have_content(@invoice_1.total_revenue)
@@ -102,7 +102,7 @@ RSpec.describe 'invoices show' do
   end
 
   describe 'Discounts Project User Story 7' do
-    it 'shows the total revenue for the merchant without discounts' do
+    it 'shows the total revenue for the merchant BEFORE discounts' do
       merchant1 = Merchant.create!(name: 'Hair Care')
       customer1 = Customer.create!(first_name: 'Brooke', last_name: 'Stewart')
 
@@ -113,13 +113,13 @@ RSpec.describe 'invoices show' do
       item2 = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: merchant1.id)
       item3 = Item.create!(name: "Brush", description: "This takes out tangles", unit_price: 5, merchant_id: merchant1.id)
 
-      ii1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item1.id, quantity: 10, unit_price: 10, status: 2)
-      ii2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item2.id, quantity: 20, unit_price: 8, status: 2)
-      ii3 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item3.id, quantity: 30, unit_price: 5, status: 2)
+      ii1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item1.id, quantity: 5, unit_price: 10, status: 2)
+      ii2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item2.id, quantity: 5, unit_price: 8, status: 2)
+      ii3 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item3.id, quantity: 10, unit_price: 5, status: 2)
 
       visit merchant_invoice_path(merchant1, invoice1)
 
-      expect(page).to have_content("Total Revenue: $410.00")
+      expect(page).to have_content("Total Revenue: $140.00")
     end
 
     it 'shows the total discounted revenue for the merchant WITH discounts' do
@@ -134,15 +134,15 @@ RSpec.describe 'invoices show' do
       item3 = Item.create!(name: "Brush", description: "This takes out tangles", unit_price: 5, merchant_id: merchant1.id)
 
       ii1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item1.id, quantity: 5, unit_price: 10, status: 2)
-      ii2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item2.id, quantity: 10, unit_price: 8, status: 2)
-      ii3 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item3.id, quantity: 30, unit_price: 5, status: 2)
+      ii2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item2.id, quantity: 5, unit_price: 8, status: 2)
+      ii3 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item3.id, quantity: 10, unit_price: 5, status: 2)
       discount1 = Discount.create!(percentage_discount: 10, quantity_threshold: 10, merchant_id: merchant1.id)
-      discount2 = Discount.create!(percentage_discount: 20, quantity_threshold: 20, merchant_id: merchant1.id)
-      discount3 = Discount.create!(percentage_discount: 30, quantity_threshold: 30, merchant_id: merchant1.id)
+      # discount2 = Discount.create!(percentage_discount: 20, quantity_threshold: 20, merchant_id: merchant1.id)
+      # discount3 = Discount.create!(percentage_discount: 30, quantity_threshold: 30, merchant_id: merchant1.id)
 
       visit merchant_invoice_path(merchant1, invoice1)
 
-      expect(page).to have_content("Revenue after discount: 235")
+      expect(page).to have_content("Revenue after discount: $135.00")
     end
   end
 end
