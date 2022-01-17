@@ -26,7 +26,7 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'Bulk Discounts Revenue' do
-    it 'finds the max percentage discount by quantity' do
+    xit 'finds the max percentage discount by quantity' do
       merchant1 = Merchant.create!(name: 'Hair Care')
       customer1 = Customer.create!(first_name: 'Brooke', last_name: 'Stewart')
 
@@ -70,7 +70,7 @@ RSpec.describe Invoice, type: :model do
       expect(invoice4.max_percent_discount).to eq(nil)
     end
 
-    it 'finds revenue that is discountable' do
+    xit 'finds revenue that is discountable' do
       merchant1 = Merchant.create!(name: 'Hair Care')
       customer1 = Customer.create!(first_name: 'Brooke', last_name: 'Stewart')
 
@@ -104,7 +104,7 @@ RSpec.describe Invoice, type: :model do
       ii11 = InvoiceItem.create!(invoice_id: invoice4.id, item_id: item2.id, quantity: 5, unit_price: 8, status: 2)
       ii12 = InvoiceItem.create!(invoice_id: invoice4.id, item_id: item3.id, quantity: 5, unit_price: 5, status: 2)
 
-      discount1 = Discount.create!(percentage_discount: 10, quantity_threshold: 10, merchant_id: merchant1.id)
+      discount1 = Discount.create!(percentage_discount: 20, quantity_threshold: 10, merchant_id: merchant1.id)
 
       expect(invoice1.discountable_revenue).to eq(230)
       expect(invoice2.discountable_revenue).to eq(180)
@@ -112,7 +112,7 @@ RSpec.describe Invoice, type: :model do
       expect(invoice4.discountable_revenue).to eq(0)
     end
 
-    it 'finds revenue that is NOT discountable' do
+    xit 'finds revenue that is NOT discountable' do
       merchant1 = Merchant.create!(name: 'Hair Care')
       customer1 = Customer.create!(first_name: 'Brooke', last_name: 'Stewart')
 
@@ -152,6 +152,109 @@ RSpec.describe Invoice, type: :model do
       expect(invoice2.non_discountable_revenue).to eq(25)
       expect(invoice3.non_discountable_revenue).to eq(65)
       expect(invoice4.non_discountable_revenue).to eq(115)
+    end
+
+    xit 'finds revenue that is discountable' do
+      merchant1 = Merchant.create!(name: 'Hair Care')
+      customer1 = Customer.create!(first_name: 'Brooke', last_name: 'Stewart')
+
+      invoice1 = Invoice.create!(customer_id: customer1.id, status: 2)
+      # invoice2 = Invoice.create!(customer_id: customer1.id, status: 2)
+      # invoice3 = Invoice.create!(customer_id: customer1.id, status: 2)
+      # invoice4 = Invoice.create!(customer_id: customer1.id, status: 2)
+
+      transaction1 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: invoice1.id)
+      # transaction2 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: invoice2.id)
+      # transaction3 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: invoice2.id)
+      # transaction4 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: invoice2.id)
+      item1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: merchant1.id, status: 1)
+      item2 = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: merchant1.id, status: 1)
+      item3 = Item.create!(name: "Brush", description: "This takes out tangles", unit_price: 5, merchant_id: merchant1.id, status: 1)
+      #All items eligible for bulk discount
+
+
+      ii1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item1.id, quantity: 20, unit_price: 10, status: 2)
+      ii2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item2.id, quantity: 10, unit_price: 8, status: 2)
+      ii3 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item3.id, quantity: 5, unit_price: 5, status: 2)
+      # #2 items elibigle for bulk discount
+      # ii4 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item1.id, quantity: 10, unit_price: 10, status: 2)
+      # ii5 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item2.id, quantity: 10, unit_price: 8, status: 2)
+      # ii6 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item3.id, quantity: 5, unit_price: 5, status: 2)
+      # #1 item eligible for bulk discount
+      # ii7 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item1.id, quantity: 10, unit_price: 10, status: 2)
+      # ii8 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item2.id, quantity: 5, unit_price: 8, status: 2)
+      # ii9 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item3.id, quantity: 5, unit_price: 5, status: 2)
+      # #no items elibigle for bulk discount == even need this?????? May be accounted for in max percentage discount
+      # ii10 = InvoiceItem.create!(invoice_id: invoice4.id, item_id: item1.id, quantity: 5, unit_price: 10, status: 2)
+      # ii11 = InvoiceItem.create!(invoice_id: invoice4.id, item_id: item2.id, quantity: 5, unit_price: 8, status: 2)
+      # ii12 = InvoiceItem.create!(invoice_id: invoice4.id, item_id: item3.id, quantity: 5, unit_price: 5, status: 2)
+
+      discount1 = Discount.create!(percentage_discount: 10, quantity_threshold: 10, merchant_id: merchant1.id)
+      discount2 = Discount.create!(percentage_discount: 20, quantity_threshold: 20, merchant_id: merchant1.id)
+
+      expect(invoice1.discounted_revenue).to eq()
+      # expect(invoice2.discounted_revenue).to eq()
+      # expect(invoice3.discounted_revenue).to eq()
+      # expect(invoice4.discounted_revenue).to eq()
+    end
+
+    it 'finds total revenue after discounts applied' do
+      merchant1 = Merchant.create!(name: 'Hair Care')
+      merchant2 = Merchant.create!(name: 'Pet Supplies')
+      customer1 = Customer.create!(first_name: 'Brooke', last_name: 'Stewart')
+
+      invoice1 = Invoice.create!(customer_id: customer1.id, status: 2)
+      invoice2 = Invoice.create!(customer_id: customer1.id, status: 2)
+      invoice3 = Invoice.create!(customer_id: customer1.id, status: 2)
+      invoice4 = Invoice.create!(customer_id: customer1.id, status: 2)
+
+      transaction1 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: invoice1.id)
+
+      item1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: merchant1.id, status: 1)
+      item2 = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: merchant1.id, status: 1)
+      item3 = Item.create!(name: "Brush", description: "This takes out tangles", unit_price: 5, merchant_id: merchant1.id, status: 1)
+      item4 = Item.create!(name: "Cat Treats", description: "Treats for the cat", unit_price: 5, merchant_id: merchant2.id, status: 1)
+
+      ii1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item1.id, quantity: 10, unit_price: 10, status: 2)
+      #90
+      ii2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item2.id, quantity: 10, unit_price: 8, status: 2)
+      #72
+      ii3 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item3.id, quantity: 10, unit_price: 5, status: 2)
+      #45
+
+      ii4 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item1.id, quantity: 10, unit_price: 10, status: 2)
+      #90
+      ii5 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item2.id, quantity: 20, unit_price: 8, status: 2)
+      #128
+      ii6 = InvoiceItem.create!(invoice_id: invoice2.id, item_id: item3.id, quantity: 5, unit_price: 5, status: 2)
+      #25
+
+      ii7 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item1.id, quantity: 10, unit_price: 10, status: 2)
+      #90
+      ii8 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item2.id, quantity: 20, unit_price: 8, status: 2)
+      #128
+      ii9 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item3.id, quantity: 5, unit_price: 5, status: 2)
+      #25
+      ii10 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item4.id, quantity: 10, unit_price: 5, status: 2)
+      #50  discount does not apply, different merchant
+
+      ii11 = InvoiceItem.create!(invoice_id: invoice4.id, item_id: item1.id, quantity: 10, unit_price: 10, status: 2)
+      #90
+      ii12 = InvoiceItem.create!(invoice_id: invoice4.id, item_id: item2.id, quantity: 20, unit_price: 8, status: 2)
+      #128
+      ii13 = InvoiceItem.create!(invoice_id: invoice4.id, item_id: item3.id, quantity: 5, unit_price: 5, status: 2)
+      #25 - discount 3 does not apply, different merchant from the item
+      ii14 = InvoiceItem.create!(invoice_id: invoice4.id, item_id: item4.id, quantity: 2, unit_price: 5, status: 2)
+      #10
+
+      discount1 = Discount.create!(percentage_discount: 10, quantity_threshold: 10, merchant_id: merchant1.id)
+      discount2 = Discount.create!(percentage_discount: 20, quantity_threshold: 10, merchant_id: merchant1.id)
+      discount3 = Discount.create!(percentage_discount: 30, quantity_threshold: 5, merchant_id: merchant2.id)
+
+      expect(invoice1.revenue_after_discount).to eq(207)
+      # expect(invoice2.revenue_after_discount).to eq(243)
+      # expect(invoice3.revenue_after_discount).to eq(293)
+      # expect(invoice4.revenue_after_discount).to eq(253)
     end
   end
 end
