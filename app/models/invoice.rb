@@ -30,4 +30,10 @@ class Invoice < ApplicationRecord
           .sum("invoice_items.unit_price * invoice_items.quantity")
   end
 
+  def non_discountable_revenue
+    invoice_items.joins(item: {merchant: :discounts})
+          .where("invoice_items.quantity < discounts.quantity_threshold")
+          .select("invoice_items.unit_price * invoice_items.quantity")
+          .sum("invoice_items.unit_price * invoice_items.quantity")
+  end
 end
