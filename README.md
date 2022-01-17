@@ -74,7 +74,7 @@ When I visit my bulk discount show page
 Then I see a link to edit the bulk discount
 When I click this link
 Then I am taken to a new page with a form to edit the discount
-[ ]
+[X]
 And I see that the discounts current attributes are pre-poluated in the form
 When I change any/all of the information and click submit
 Then I am redirected to the bulk discount's show page
@@ -83,16 +83,17 @@ And I see that the discount's attributes have been updated
 ================
 
 7) Merchant Invoice Show Page: Total Revenue and Discounted Revenue
-[ ]
+[x]
 As a merchant
 When I visit my merchant invoice show page
 Then I see the total revenue for my merchant from this invoice (not including discounts)
+[ ]
 And I see the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation
 
 =================
 
 8) Merchant Invoice Show Page: Link to applied discounts
-[ ]
+[x]
 As a merchant
 When I visit my merchant invoice show page
 Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)
