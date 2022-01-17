@@ -150,7 +150,7 @@ RSpec.describe InvoiceItem, type: :model do
       expect(iiC.pre_discount_revenue).to eq(375)
     end
 
-    xit 'calculates discounted revenue for each invoice item' do
+    it 'calculates discounted revenue for each invoice item' do
       merchantA = Merchant.create!(name: 'Hair Care')
       merchantB = Merchant.create!(name: 'Pet Stuff')
       customer1 = Customer.create!(first_name: 'Brooke', last_name: 'Stewart')
@@ -163,12 +163,13 @@ RSpec.describe InvoiceItem, type: :model do
       iiA = InvoiceItem.create!(invoice_id: invoiceA.id, item_id: itemA.id, quantity: 12, unit_price: 10, status: 2)
       iiB = InvoiceItem.create!(invoice_id: invoiceA.id, item_id: itemB.id, quantity: 15, unit_price: 8, status: 2)
       iiC = InvoiceItem.create!(invoice_id: invoiceA.id, item_id: itemC.id, quantity: 15, unit_price: 25, status: 2)
+
       discountA = Discount.create!(percentage_discount: 20, quantity_threshold: 10, merchant_id: merchantA.id)
       discountB = Discount.create!(percentage_discount: 30, quantity_threshold: 15, merchant_id: merchantA.id)
 
       expect(iiA.discounted_revenue).to eq(96)
       expect(iiB.discounted_revenue).to eq(84)
-      # expect(iiC.discounted_revenue).to eq(nil)
+      expect(iiC.discounted_revenue).to eq(375)
     end
   end
 end
