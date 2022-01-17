@@ -33,10 +33,12 @@ RSpec.describe Invoice, type: :model do
       invoice1 = Invoice.create!(customer_id: customer1.id, status: 2)
       invoice2 = Invoice.create!(customer_id: customer1.id, status: 2)
       invoice3 = Invoice.create!(customer_id: customer1.id, status: 2)
+      invoice4 = Invoice.create!(customer_id: customer1.id, status: 2)
 
       transaction1 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: invoice1.id)
       transaction2 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: invoice2.id)
       transaction3 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: invoice2.id)
+      transaction4 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: invoice2.id)
 
       item1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: merchant1.id, status: 1)
       item2 = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: merchant1.id, status: 1)
@@ -54,6 +56,10 @@ RSpec.describe Invoice, type: :model do
       ii8 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item2.id, quantity: 10, unit_price: 8, status: 2)
       ii9 = InvoiceItem.create!(invoice_id: invoice3.id, item_id: item3.id, quantity: 10, unit_price: 5, status: 2)
 
+      ii10 = InvoiceItem.create!(invoice_id: invoice4.id, item_id: item1.id, quantity: 5, unit_price: 10, status: 2)
+      ii11 = InvoiceItem.create!(invoice_id: invoice4.id, item_id: item2.id, quantity: 5, unit_price: 8, status: 2)
+      ii12 = InvoiceItem.create!(invoice_id: invoice4.id, item_id: item3.id, quantity: 5, unit_price: 5, status: 2)
+
       discount1 = Discount.create!(percentage_discount: 10, quantity_threshold: 10, merchant_id: merchant1.id)
       discount2 = Discount.create!(percentage_discount: 20, quantity_threshold: 20, merchant_id: merchant1.id)
       discount3 = Discount.create!(percentage_discount: 30, quantity_threshold: 30, merchant_id: merchant1.id)
@@ -61,6 +67,7 @@ RSpec.describe Invoice, type: :model do
       expect(invoice1.max_percent_discount).to eq(30)
       expect(invoice2.max_percent_discount).to eq(20)
       expect(invoice3.max_percent_discount).to eq(10)
+      expect(invoice4.max_percent_discount).to eq(nil)
     end
   end
 end
