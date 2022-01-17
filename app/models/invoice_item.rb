@@ -21,4 +21,12 @@ class InvoiceItem < ApplicationRecord
       .order(:percentage_discount)
       .pluck(:percentage_discount).last
   end
+
+  def pre_discount_revenue
+    unit_price * quantity
+  end
+
+  def discounted_revenue
+    self.percent_discount_to_apply
+  end
 end

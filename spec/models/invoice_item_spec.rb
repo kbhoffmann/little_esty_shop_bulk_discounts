@@ -129,7 +129,28 @@ RSpec.describe InvoiceItem, type: :model do
       expect(iiC.percent_discount_to_apply).to eq(nil)
     end
 
-    it 'calculates discounted revenue for each invoice item' do
+    it 'calculates revenue for an invoice item before any discounts applied' do
+      merchantA = Merchant.create!(name: 'Hair Care')
+      merchantB = Merchant.create!(name: 'Pet Stuff')
+      customer1 = Customer.create!(first_name: 'Brooke', last_name: 'Stewart')
+      invoiceA = Invoice.create!(customer_id: customer1.id, status: 2)
+      transaction1 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: invoiceA.id)
+      itemA = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: merchantA.id, status: 1)
+      itemB = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: merchantA.id, status: 1)
+      itemC = Item.create!(name: "Dog Food", description: "Food for the Dog", unit_price: 25, merchant_id: merchantB.id, status: 1)
+
+      iiA = InvoiceItem.create!(invoice_id: invoiceA.id, item_id: itemA.id, quantity: 12, unit_price: 10, status: 2)
+      iiB = InvoiceItem.create!(invoice_id: invoiceA.id, item_id: itemB.id, quantity: 15, unit_price: 10, status: 2)
+      iiC = InvoiceItem.create!(invoice_id: invoiceA.id, item_id: itemC.id, quantity: 15, unit_price: 25, status: 2)
+      discountA = Discount.create!(percentage_discount: 20, quantity_threshold: 10, merchant_id: merchantA.id)
+      discountB = Discount.create!(percentage_discount: 30, quantity_threshold: 15, merchant_id: merchantA.id)
+
+      expect(iiA.pre_discount_revenue).to eq(120)
+      expect(iiB.pre_discount_revenue).to eq(150)
+      expect(iiC.pre_discount_revenue).to eq(375)
+    end
+
+    xit 'calculates discounted revenue for each invoice item' do
       merchantA = Merchant.create!(name: 'Hair Care')
       merchantB = Merchant.create!(name: 'Pet Stuff')
       customer1 = Customer.create!(first_name: 'Brooke', last_name: 'Stewart')
