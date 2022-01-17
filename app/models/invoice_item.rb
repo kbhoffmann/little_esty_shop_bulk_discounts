@@ -27,8 +27,8 @@ class InvoiceItem < ApplicationRecord
   end
 
   def discounted_revenue
-    if percent_discount_to_apply !=nil
-      pre_discount_revenue - (pre_discount_revenue * (percent_discount_to_apply).to_f/100)
+    if percent_discount_to_apply != nil
+      pre_discount_revenue - (pre_discount_revenue * (percent_discount_to_apply.to_f/100))
     elsif percent_discount_to_apply == nil
       pre_discount_revenue
     end
