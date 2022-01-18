@@ -160,7 +160,6 @@ RSpec.describe 'invoices show' do
       discount1 = Discount.create!(percentage_discount: 10, quantity_threshold: 10, merchant_id: merchant1.id)
 
       visit merchant_invoice_path(merchant1, invoice1)
-      save_and_open_page
 
       within("#item-#{item1.id}") do
         click_link "See Discount"
