@@ -23,13 +23,16 @@
   <p>Total Revenue: <%= number_to_currency@invoice.total_revenue %></p>
   <p>Revenue after discount: <%= number_to_currency@invoice.revenue_after_discount %></p>
 
-  <% @customer.invoices.each do |invoice| %>
-   <% invoice.items.each do |item| %>
-   <div id= "item-<%= item.id %>">
-    <p><%= item.name %> <%= link_to "See Discount", merchant_discount_path(@merchant.id, item.merchant.discounts.first.id) %></p></p>
-  </div>
-   <% end %>
-  <% end %>
+<h4>Items with Discounts:</h4>
+  <% @invoice.items.each do |item| %>
+    <div id= "item-<%= item.id %>">
+          <% item.invoice_items.each do |invoice_item| %>
+            <% if invoice_item.percent_discount_to_apply != nil %>
+            <p><%= item.name %> <%= link_to "See Discount Applied", merchant_discount_path(@merchant.id, item.merchant.discounts.last.id) %></p>
+            <% end  %>
+          <% end %>
+      </div>
+  <% end  %>
 
   <h4>Customer:</h4>
     <%= @customer.first_name %> <%= @customer.last_name %><br>
