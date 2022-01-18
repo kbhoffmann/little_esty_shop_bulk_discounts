@@ -8,6 +8,7 @@ class InvoicesController < ApplicationController
 
   def show
     @customer = @invoice.customer
+    #invoice item was in here from legacy code
     @invoice_item = InvoiceItem.where(invoice_id: params[:id]).first
   end
 
