@@ -25,13 +25,13 @@
 
   <% @invoice.items.each do |item| %>
     <div id= "item-<%= item.id %>">
-      <p><%= item.name %>
-        <% @invoice.invoice_items.each do |invoice_item| %>
+        <p><%= item.name %>
+          <% item.invoice_items.each do |invoice_item| %>
             <% if invoice_item.percent_discount_to_apply != nil %>
-              <%= link_to "See Discount", merchant_discount_path(@merchant.id, item.merchant.discounts.last.id) %></p>
+              <%= link_to "See Discount Applied", merchant_discount_path(@merchant.id, item.merchant.discounts.last.id) %></p>
             <% end  %>
           <% end %>
-    </div>
+      </div>
   <% end  %>
 
   <h4>Customer:</h4>

@@ -162,14 +162,17 @@ RSpec.describe 'invoices show' do
       visit merchant_invoice_path(merchant1, invoice1)
 
       within("#item-#{item1.id}") do
-        click_link "See Discount"
+        expect(page).to_not have_link("See Discount Applied")
       end
-      expect(current_path).to eq(merchant_discount_path(merchant1, discount1))
+
+      within("#item-#{item2.id}") do
+        expect(page).to_not have_link("See Discount Applied")
+      end
+
+      within("#item-#{item3.id}") do
+        click_link "See Discount Applied"
+        expect(current_path).to eq(merchant_discount_path(merchant1, discount1))
+      end
     end
   end
 end
-
-# <% if item.invoice_item_bulk_discount_applied(@invoice) != nil %>
-#          <p>Bulk Discount Applied: <%= link_to "#{item.invoice_item_bulk_discount_applied(@invoice).id}",
-#             "/merchants/#{@merchant.id}/bulk_discounts/#{item.invoice_item_bulk_discount_applied(@invoice).id}" %></p>
-#        <% end %>
