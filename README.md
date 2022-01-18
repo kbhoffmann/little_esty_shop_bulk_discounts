@@ -87,13 +87,13 @@ And I see that the discount's attributes have been updated
 As a merchant
 When I visit my merchant invoice show page
 Then I see the total revenue for my merchant from this invoice (not including discounts)
-[ ]
+[x]
 And I see the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation
 
 =================
 
 8) Merchant Invoice Show Page: Link to applied discounts
-[x]
+[ ]
 As a merchant
 When I visit my merchant invoice show page
 Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)

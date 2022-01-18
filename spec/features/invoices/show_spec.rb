@@ -137,12 +137,40 @@ RSpec.describe 'invoices show' do
       ii2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item2.id, quantity: 5, unit_price: 8, status: 2)
       ii3 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item3.id, quantity: 10, unit_price: 5, status: 2)
       discount1 = Discount.create!(percentage_discount: 10, quantity_threshold: 10, merchant_id: merchant1.id)
-      # discount2 = Discount.create!(percentage_discount: 20, quantity_threshold: 20, merchant_id: merchant1.id)
-      # discount3 = Discount.create!(percentage_discount: 30, quantity_threshold: 30, merchant_id: merchant1.id)
 
       visit merchant_invoice_path(merchant1, invoice1)
 
       expect(page).to have_content("Revenue after discount: $135.00")
     end
+
+    it 'links to the applied discounts' do
+      merchant1 = Merchant.create!(name: 'Hair Care')
+      customer1 = Customer.create!(first_name: 'Brooke', last_name: 'Stewart')
+
+      invoice1 = Invoice.create!(customer_id: customer1.id, status: 2)
+      transaction1 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: invoice1.id)
+
+      item1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: merchant1.id, status: 1)
+      item2 = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: merchant1.id)
+      item3 = Item.create!(name: "Brush", description: "This takes out tangles", unit_price: 5, merchant_id: merchant1.id)
+
+      ii1 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item1.id, quantity: 5, unit_price: 10, status: 2)
+      ii2 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item2.id, quantity: 5, unit_price: 8, status: 2)
+      ii3 = InvoiceItem.create!(invoice_id: invoice1.id, item_id: item3.id, quantity: 10, unit_price: 5, status: 2)
+      discount1 = Discount.create!(percentage_discount: 10, quantity_threshold: 10, merchant_id: merchant1.id)
+
+      visit merchant_invoice_path(merchant1, invoice1)
+      save_and_open_page
+
+      within("#item-#{item1.id}") do
+        click_link "See Discount"
+      end
+      expect(current_path).to eq(merchant_discount_path(merchant1, discount1))
+    end
   end
 end
+
+# <% if item.invoice_item_bulk_discount_applied(@invoice) != nil %>
+#          <p>Bulk Discount Applied: <%= link_to "#{item.invoice_item_bulk_discount_applied(@invoice).id}",
+#             "/merchants/#{@merchant.id}/bulk_discounts/#{item.invoice_item_bulk_discount_applied(@invoice).id}" %></p>
+#        <% end %>
