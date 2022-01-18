@@ -1,108 +1,30 @@
-Bulk Discounts are subject to the following criteria:
+![Screen Shot 2022-01-09 at 11 27 27 PM](https://user-images.githubusercontent.com/88950699/148721783-bbc0ba33-af58-4a40-bbbd-80e08eaf6b54.png)
 
-Bulk discounts should have a percentage discount as well as a quantity threshold
+A simple and lightweight e-commerce platform that allows for unlimited customization.
+- Allows for admin and merchant users
+   - Admin users can manage merchant accounts, track customer invoices, and view sales data.  
+   - Merchant users can manage their inventory, create invoices and transactions, create bulk discounts, track order status, and even view data showing  best-selling items, repeat customers, and more.
 
-Bulk discounts should belong to a Merchant
+→ [Click here to navigate a demo as an admin user](https://evening-ocean-89577.herokuapp.com/admin/dashboard)  
+→ [Click here to navigate a demo as a merchant user](https://evening-ocean-89577.herokuapp.com/merchant/2/dashboard)
 
-A Bulk discount is eligible for all items that the merchant sells. Bulk discounts for one merchant should not affect items sold by another merchant
-Merchants can have multiple bulk discounts
-If an item meets the quantity threshold for multiple bulk discounts, only the one with the greatest percentage discount should be applied
-Bulk discounts should apply on a per-item basis
-If the quantity of an item ordered meets or exceeds the quantity threshold, then the percentage discount should apply to that item only. Other items that did not meet the quantity threshold will not be affected.
-The quantities of items ordered cannot be added together to meet the quantity thresholds, e.g. a customer cannot order 1 of Item A and 1 of Item B to meet a quantity threshold of 2. They must order 2 or Item A and/or 2 of Item B
+Created using:  
+![RoR](https://img.shields.io/badge/Ruby_on_Rails-CC0000?style=for-the-badge&logo=ruby-on-rails&logoColor=white)
+![pgsql](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)  
+Ruby 2.7.2 - Rails 5.2.6 - PostgreSQL 14.1  
 
+Tested using:   
+![rspec](https://img.shields.io/gem/v/rspec-rails?label=rspec&style=flat-square)
+![shoulda](https://img.shields.io/gem/v/shoulda-matchers?label=shoulda-matchers&style=flat-square)
+![capybara](https://img.shields.io/gem/v/capybara?label=capybara&style=flat-square)
+![simplecov](https://img.shields.io/gem/v/simplecov?label=simplecov&style=flat-square)
+![orderly](https://img.shields.io/gem/v/orderly?label=orderly&style=flat-square)
+![factory](https://img.shields.io/gem/v/factory_bot?label=factory%20bot&style=flat-square)
+![faker](https://img.shields.io/gem/v/faker?label=faker&style=flat-square)
 
-1) Merchant Bulk Discounts Index
-[X]
-As a merchant
-When I visit my merchant dashboard
-Then I see a link to view all my discounts
-When I click this link
-Then I am taken to my bulk discounts index page
-Where I see all of my bulk discounts including their
-percentage discount and quantity thresholds
-And each bulk discount listed includes a link to its show page
+![closed PRs](https://github.com/kbhoffmann/little_esty_shop_bulk_discounts/pulls?q=is%3Apr+is%3Aclosed)   
 
-================
+## About the Project
 
-2) As a merchant
-[ ]- need to create a section and consume the API
-When I visit the discounts index page
-I see a section with a header of "Upcoming Holidays"
-In this section the name and date of the next 3 upcoming US holidays are listed.
-
-Use the Next Public Holidays Endpoint in the [Nager.Date API](https://date.nager.at/swagger/index.html)
-
-=============
-
-3) Merchant Bulk Discount Create
-[X]
-As a merchant
-When I visit my bulk discounts index
-Then I see a link to create a new discount
-When I click this link
-Then I am taken to a new page where I see a form to add a new bulk discount
-When I fill in the form with valid data
-Then I am redirected back to the bulk discount index
-And I see my new bulk discount listed
-
-=============
-
-4) Merchant Bulk Discount Delete
-[X]
-As a merchant
-When I visit my bulk discounts index
-Then next to each bulk discount I see a link to delete it
-When I click this link
-Then I am redirected back to the bulk discounts index page
-And I no longer see the discount listed
-
-=============
-
-5) Merchant Bulk Discount Show
-[X]
-As a merchant
-When I visit my bulk discount show page
-Then I see the bulk discount's quantity threshold and percentage discount
-
-==============
-
-6) Merchant Bulk Discount Edit
-[X]
-As a merchant
-When I visit my bulk discount show page
-Then I see a link to edit the bulk discount
-When I click this link
-Then I am taken to a new page with a form to edit the discount
-[X]
-And I see that the discounts current attributes are pre-poluated in the form
-When I change any/all of the information and click submit
-Then I am redirected to the bulk discount's show page
-And I see that the discount's attributes have been updated
-
-================
-
-7) Merchant Invoice Show Page: Total Revenue and Discounted Revenue
-[x]
-As a merchant
-When I visit my merchant invoice show page
-Then I see the total revenue for my merchant from this invoice (not including discounts)
-[x]
-And I see the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation
-
-=================
-
-8) Merchant Invoice Show Page: Link to applied discounts
-[X]
-As a merchant
-When I visit my merchant invoice show page
-Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)
-
-==========================================================================
-
-9) Admin Invoice Show Page: Total Revenue and Discounted Revenue
-[ ]
-As an admin
-When I visit an admin invoice show page
-Then I see the total revenue from this invoice (not including discounts)
-And I see the total discounted revenue from this invoice which includes bulk discounts in the calculation
+[Little Esty Shop Bulk Discounts Project Description and Evaluation Rubric](https://backend.turing.edu/module2/projects/bulk_discounts)
