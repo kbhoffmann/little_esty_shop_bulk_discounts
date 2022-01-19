@@ -16,8 +16,7 @@ class InvoiceItem < ApplicationRecord
   end
 
   def percent_discount_to_apply
-    Discount.where('discounts.quantity_threshold <= ?', "#{self.quantity}")
-            .where('discounts.merchant_id = ?', "#{self.item.merchant_id}")
+    Discount.where("discounts.quantity_threshold <= #{self.quantity} AND discounts.merchant_id = #{self.item.merchant_id}")
             .pluck(:percentage_discount).max
   end
 
