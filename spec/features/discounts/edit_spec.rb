@@ -18,7 +18,6 @@ RSpec.describe 'Merchant Discount Edit Page' do
   end
 
   it 'can edit both discount attributes' do
-
     fill_in("Percent Discount", with: 25)
     fill_in("Quantity Threshold", with: 50)
 
@@ -35,9 +34,7 @@ RSpec.describe 'Merchant Discount Edit Page' do
   end
 
   it 'can update only the percent discount' do
-
     fill_in("Percent Discount", with: 25)
-
     click_on "Submit"
 
     expect(current_path).to eq(merchant_discount_path(@merchant1, @discount1))
@@ -51,9 +48,7 @@ RSpec.describe 'Merchant Discount Edit Page' do
   end
 
   it 'can update only the quantity threshold' do
-
     fill_in("Quantity Threshold", with: 50)
-
     click_on "Submit"
 
     expect(current_path).to eq(merchant_discount_path(@merchant1, @discount1))
