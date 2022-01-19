@@ -16,10 +16,9 @@ class InvoiceItem < ApplicationRecord
   end
 
   def percent_discount_to_apply
-      Discount.all.where('discounts.quantity_threshold <= ?', "#{self.quantity}")
-      .where('discounts.merchant_id = ?', "#{self.item.merchant_id}")
-      .order(:percentage_discount)
-      .pluck(:percentage_discount).last
+    Discount.where('discounts.quantity_threshold <= ?', "#{self.quantity}")
+            .where('discounts.merchant_id = ?', "#{self.item.merchant_id}")
+            .pluck(:percentage_discount).max
   end
 
   def pre_discount_revenue
@@ -27,15 +26,10 @@ class InvoiceItem < ApplicationRecord
   end
 
   def discounted_revenue
-    if percent_discount_to_apply != nil
+    if percent_discount_to_apply
       pre_discount_revenue - (pre_discount_revenue * (percent_discount_to_apply.to_f/100))
-    elsif percent_discount_to_apply == nil
+    else
       pre_discount_revenue
     end
   end
 end
-
-
-
-# convert_to_decimal:
-#  (self.percent_discount_to_apply).to_f/100
