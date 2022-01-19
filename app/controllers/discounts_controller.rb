@@ -14,7 +14,7 @@ class DiscountsController < ApplicationController
 
   def create
     merchant = Merchant.find(params[:merchant_id])
-    discount = merchant.discounts.new(quantity_threshold: params["Quantity Threshold"], percentage_discount: params["Percent Discount"])
+    discount = merchant.discounts.new(discount_params)
     if discount.save
       redirect_to merchant_discounts_path(merchant.id)
     else
@@ -34,7 +34,7 @@ class DiscountsController < ApplicationController
     discount = Discount.find(params[:id])
     merchant = Merchant.find(params[:merchant_id])
 
-    if discount.update(quantity_threshold: params["Quantity Threshold"], percentage_discount: params["Percent Discount"])
+    if discount.update(discount_params)
       redirect_to merchant_discount_path(merchant, discount)
     else
       error_message = discount.errors.full_messages.to_sentence
@@ -52,4 +52,9 @@ class DiscountsController < ApplicationController
     redirect_to merchant_discounts_path(params[:merchant_id])
   end
 
+  private
+
+  def discount_params
+    params.permit(:quantity_threshold, :percentage_discount)
+  end
 end
